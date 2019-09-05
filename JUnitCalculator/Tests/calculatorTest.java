@@ -1,28 +1,91 @@
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 public class calculatorTest {
-	
+
+
+	calculator calculate;
+
+	@Before
+	public void setUp() {
+		calculate = Mockito.spy(calculator.class);
+	}
+
 	@Test
-	public void CalTests() {
-	assertEquals("error in add()", 4,calculator.sum(1,2));
-	assertEquals("error in add()", -3,calculator.sum(-1,-2));
-	assertEquals("error in add()", 9,calculator.sum(9,0));
+	public void sum() {
+
+		// arrange
+		int a = 1;
+		int b = 3;
+
+		// act
+		int result = calculate.sum(a, b);
+
+		// assert
+		assertEquals(4, result);
 	}
 
-	public void CalTestsAddFail() {
-	assertEquals("error in add()", 0,calculator.sum(1,2));
+	@Test
+	public void subtraction() {
+
+		// arrange
+		int a = 4;
+		int b = 2;
+
+		// act
+		int result = calculate.subtraction(a, b);
+
+		// assert
+		assertEquals(2, result);
 	}
 
-	public void CalTestsSubPass() {
-	assertEquals("error in sub()", 1,calculator.sum(1,2));
-	assertEquals("error in sub()", -1,calculator.sum(-1,-2));
-	assertEquals("error in sub()", 0,calculator.sum(2,1));
+	@Test
+	public void checkPalindrome() {
+
+		// arrange
+
+		String word = "Esdaadse";
+
+		// act
+
+		String result = calculate.checkPalindrome(word);
+
+		// assert
+
+		assertEquals("It is palindrome", result);
 	}
 
-	public void CalTestsSubFail() {
-	assertEquals("error in add()", 0,calculator.sum(2,1));
+	@Test
+	public void TrueAndTrue() {
+		// arrange
+		boolean condition1 = true;
+		boolean condition2 = true;
+
+		// act
+		boolean validate = calculate.logic(condition1, condition2);
+
+		// asert
+		Assert.assertTrue(validate);
+
+	}
+
+	@Test
+	public void biggestSum() {
+		// arrange
+		int a[] = { 6, 3 };
+		int b[] = { 9, 1 };
+		int expected[] = { 9, 1 };
+
+		// act
+		int[] result = calculate.addVectors(a, b);
+
+		// asert
+		assertArrayEquals(expected, result);
 
 	}
 }
